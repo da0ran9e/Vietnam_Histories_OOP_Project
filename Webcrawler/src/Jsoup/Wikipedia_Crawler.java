@@ -20,13 +20,18 @@ public class Wikipedia_Crawler {
 
     /**
      * This function loads the links and keywords from a JSON file and crawls each link to extract the text content
+     * @param filePath - path to the JSON file
+     *                  The JSON file contains a list of links and keywords
+     * @see Jsoup_find
+     * @see Space2Underscores
+     * @version 1.0
+     *
      */
     public static void Href_loader(String filePath){
         //Đọc file JSON
-        String jsonFilePath = "links_Lịch sử Việt Nam – Wikipedia tiếng Việt.json";
         JSONParser parser = new JSONParser();
         try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(jsonFilePath));
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(filePath));
             JSONArray linkArray = (JSONArray) jsonObject.get("TuKhoaVaLink");
 
             // Lặp qua danh sách các link
@@ -85,6 +90,9 @@ public class Wikipedia_Crawler {
     }
     /**
      *This function replaces spaces in a string with underscores
+     * @param input - string to be processed
+     *               The input string is a string containing spaces
+     * @return output - processed string
      */
     public static String Space2Underscores(String input) {
         if (input == null) {
@@ -107,6 +115,11 @@ public class Wikipedia_Crawler {
 
     /**
      * This function crawls a single Wikipedia page to extract the main sections and paragraphs
+     * @param url - link to the Wikipedia page
+     * @see Jsoup_find
+     * @see Space2Underscores
+     * @version 1.0
+     *
      */
     private static void Jsoup_find(String url) {
         try {
@@ -190,7 +203,7 @@ public class Wikipedia_Crawler {
     public static void main(String[] args) {
         String url = "https://vi.wikipedia.org/wiki/Lịch_sử_Việt_Nam";
         String path = "links_Lịch sử Việt Nam – Wikipedia tiếng Việt.json";
-        //Jsoup_find(url);
-        //Href_loader(path);
+//        Jsoup_find(url);
+//        Href_loader(path);
     }
 }
