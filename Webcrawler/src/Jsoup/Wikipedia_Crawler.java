@@ -11,8 +11,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+*This class contains methods to crawl Wikipedia pages and extract their content in JSON format. The class uses the JSoup library to connect to Wikipedia pages and extract their HTML content. The extracted content is then parsed and transformed into a JSON object, which is saved to a file in the local file system.
+The class contains three methods: Href_loader, Space2Underscores, and Jsoup_find. The Href_loader method loads a list of Wikipedia page links from a JSON file and iterates over the links to extract their content. The Space2Underscores method replaces spaces in a string with underscores. The Jsoup_find method connects to a Wikipedia page and extracts its content.
+The class uses the JSON.simple library to parse and create JSON objects. The class relies on the JSoup library to extract HTML content from Wikipedia pages, and it assumes that the content is well-formed and follows the expected structure of Wikipedia pages.
+*/
 public class Wikipedia_Crawler {
 
+    /**
+     * This function loads the links and keywords from a JSON file and crawls each link to extract the text content
+     */
     public static void Href_loader(String filePath){
         //Đọc file JSON
         String jsonFilePath = "links_Lịch sử Việt Nam – Wikipedia tiếng Việt.json";
@@ -75,6 +83,9 @@ public class Wikipedia_Crawler {
             e.printStackTrace();
         }
     }
+    /**
+     *This function replaces spaces in a string with underscores
+     */
     public static String Space2Underscores(String input) {
         if (input == null) {
             return null;
@@ -94,6 +105,9 @@ public class Wikipedia_Crawler {
         return sb.toString();
     }
 
+    /**
+     * This function crawls a single Wikipedia page to extract the main sections and paragraphs
+     */
     private static void Jsoup_find(String url) {
         try {
             // Kết nối và tải nội dung của trang Wikipedia
@@ -177,7 +191,6 @@ public class Wikipedia_Crawler {
         String url = "https://vi.wikipedia.org/wiki/Lịch_sử_Việt_Nam";
         String path = "links_Lịch sử Việt Nam – Wikipedia tiếng Việt.json";
         //Jsoup_find(url);
-        Href_loader(path);
-        //jsonReader(path);
+        //Href_loader(path);
     }
 }
