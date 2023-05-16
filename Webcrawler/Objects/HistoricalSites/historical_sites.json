@@ -1,0 +1,57 @@
+{
+    " historical_site": [
+      {
+        "name": "Hạ Long Bay",
+        "address": "Hạ Long, Quảng Ninh, Việt Nam",
+        "location": {
+          "latitude": 20.9100512,
+          "longitude": 107.1839029
+        },
+        "description": "Hạ Long Bay is a UNESCO World Heritage Site and a popular tourist destination known for its stunning limestone formations and emerald waters.",
+        "history": "According to legend, Hạ Long Bay was created by a dragon who formed the islands with its tail as it descended into the sea. The bay has been inhabited by various indigenous peoples for thousands of years.",
+        "activities": "Visitors can take a cruise around the bay, kayak or swim in the water, explore the numerous caves and grottos, and visit nearby fishing villages.",
+        "information": {
+          "price": "Varies depending on the type of tour or activity",
+          "operating_hours": "24/7",
+          "policies": "No littering or fishing allowed, respect local customs and traditions"
+        },
+        "media": {
+          "images": [
+            "https://example.com/images/halong-bay-1.jpg",
+            "https://example.com/images/halong-bay-2.jpg"
+          ],
+          "videos": [
+            "https://example.com/videos/halong-bay-1.mp4",
+            "https://example.com/videos/halong-bay-2.mp4"
+          ]
+        }
+      },
+      {
+        "name": "Hội An Ancient Town",
+        "address": "Hội An, Quảng Nam, Việt Nam",
+        "location": {
+          "latitude": 15.8778,
+          "longitude": 108.3283
+        },
+        "description": "Hội An Ancient Town is a UNESCO World Heritage Site and a well-preserved example of a Southeast Asian trading port from the 15th to 19th centuries.",
+        "history": "Hội An was an important port town during the Champa Kingdom and later became a major trading center for Chinese, Japanese, and European merchants.",
+        "activities": "Visitors can explore the old town's narrow streets, ancient temples, and traditional architecture, shop for local handicrafts and textiles, and enjoy the local cuisine.",
+        "information": {
+          "price": "Varies depending on the activity or attraction",
+          "operating_hours": "Most attractions are open from 8am to 5pm",
+          "policies": "No smoking or littering allowed, respect local customs and traditions"
+        },
+        "media": {
+          "images": [
+            "https://example.com/images/hoi-an-1.jpg",
+            "https://example.com/images/hoi-an-2.jpg"
+          ],
+          "videos": [
+            "https://example.com/videos/hoi-an-1.mp4",
+            "https://example.com/videos/hoi-an-2.mp4"
+          ]
+        }
+      }
+    ]
+  }
+  

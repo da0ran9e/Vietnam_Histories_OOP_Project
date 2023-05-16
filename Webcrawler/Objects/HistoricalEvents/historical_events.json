@@ -1,0 +1,37 @@
+{
+    "historical_event": [
+        {
+            "event_name": "Battle of Bach Dang",
+            "event_time": {
+            "day": 20,
+            "month": 3,
+            "year": 1288
+            },
+            "event_location": {
+            "name": "Bach Dang River",
+            "geographical_location": {
+            "latitude": 20.955833,
+            "longitude": 106.974444
+            }
+            },
+            "event_description": "A battle between the forces of Vietnamese general Tran Hung Dao and Mongol invaders. Tran Hung Dao devised a strategy to lure the Mongol fleet into the narrow Bach Dang River and then ambushed them with hidden stakes, destroying their fleet.",
+            "event_impact": "The Battle of Bach Dang was a turning point in Vietnamese history, as it marked the end of Mongol invasions and the preservation of Vietnam's independence. It is also celebrated as a symbol of Vietnamese military genius and patriotism.",
+            "related_events": [
+            "Tran Hung Dao's other victories against the Mongols",
+            "Nguyen Hue's liberation of the country from the Chinese Qing dynasty",
+            "The Battle of Dien Bien Phu in 1954, which marked the end of French colonialism in Vietnam"
+            ],
+            "related_personalities": [
+            "Tran Hung Dao",
+            "Kublai Khan",
+            "Nguyen Hue",
+            "Ho Chi Minh"
+            ],
+            "related_locations": [
+            "Tran Quoc Pagoda in Hanoi",
+            "Bach Dang historical site in Quang Ninh province",
+            "The Citadel of Thang Long in Hanoi"
+            ]
+        }
+    ]
+}

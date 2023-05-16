@@ -200,10 +200,55 @@ public class Wikipedia_Crawler {
             e.printStackTrace();
         }
     }
+    public static void JsoupCollect(String pageUrl){
+
+        try {
+            // Connect to the Wikipedia page and retrieve the HTML content
+            Document doc = Jsoup.connect(pageUrl).get();
+
+            // Extract the page title
+            String pageTitle = doc.title();
+            System.out.println("Page title: " + pageTitle);
+
+            // Extract the introduction section text
+            Element introSection = doc.select("#mw-content-text > div > p").first();
+            String introText = introSection.text();
+            System.out.println("Introduction text: " + introText);
+
+            // Extract the table of contents links (if it exists)
+            Element toc = doc.select("#toc").first();
+            if (toc != null) {
+                Elements tocLinks = toc.select("a[href^=\"#\"]");
+                System.out.println("Table of contents links:");
+                for (Element tocLink : tocLinks) {
+                    String linkText = tocLink.text();
+                    String linkUrl = tocLink.attr("href");
+                    System.out.println(linkText + " - " + linkUrl);
+                }
+            }
+
+            // Extract the references section
+            Element referencesSection = doc.select("div.reflist").first();
+            String referencesHtml = referencesSection.html();
+            System.out.println("References section HTML: " + referencesHtml);
+
+            // Extract any images on the page
+            Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+            System.out.println("Images on the page:");
+            for (Element image : images) {
+                String imageUrl = image.attr("src");
+                System.out.println(imageUrl);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static void main(String[] args) {
         String url = "https://vi.wikipedia.org/wiki/Lịch_sử_Việt_Nam";
         String path = "links_Lịch sử Việt Nam – Wikipedia tiếng Việt.json";
 //        Jsoup_find(url);
 //        Href_loader(path);
+        JsoupCollect(url);
     }
 }
