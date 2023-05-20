@@ -1,12 +1,13 @@
 package HForm;
 
+import org.json.JSONException;
+import org.json.simple.parser.ParseException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,8 @@ public class Home extends javax.swing.JFrame{
         initComponents();
     }
     //Variables declaration
+    private DefaultListModel<String>keywords = new DefaultListModel<>();
+    private DefaultListModel<String> updatedList = new DefaultListModel<>();
     private javax.swing.JLabel title;
     private javax.swing.JLabel closeButton;
     private javax.swing.JLabel hideButton;
@@ -41,6 +44,8 @@ public class Home extends javax.swing.JFrame{
     private javax.swing.JScrollPane contentScrollBox;
     private javax.swing.JPanel contentBody;
     private javax.swing.JLabel conTents;
+    private javax.swing.JList keywordsList;
+    private javax.swing.JScrollPane keywordsListScroll;
 
     private void initComponents(){
         title = new javax.swing.JLabel();
@@ -71,15 +76,31 @@ public class Home extends javax.swing.JFrame{
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
 
+        try {
+            keywords = SeleniumTest.keywordsList();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+
+        DefaultListModel<String> updatedList = keywords;
+        keywordsList = new JList<>(updatedList);
+        keywordsListScroll = new JScrollPane(keywordsList);
+        keywordsListScroll.setPreferredSize(new Dimension(157,314));
+
+
         //container setting
         homePanel.setBackground(new java.awt.Color(35, 39, 46));
         homePanel.setMinimumSize(new java.awt.Dimension(1000, 625));
         homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         //sideBar setting
-        sideBar.setBackground(new java.awt.Color(31, 34, 41));
+        sideBar.setBackground(new java.awt.Color( 66, 66, 66));
         sideBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         //titleBar setting
-        titleBar.setBackground(new java.awt.Color(28, 31, 38));
+        titleBar.setBackground(new java.awt.Color(33, 33, 33));
         titleBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         //add functions to handle with dragging the window
         titleBar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,7 +250,7 @@ public class Home extends javax.swing.JFrame{
             public void mouseClicked(java.awt.event.MouseEvent evt){menuButtonMouseClicked(evt);}
         });
         //scrollSideBar setting
-        subSideBar.setBackground(new java.awt.Color(19, 22, 28));
+        subSideBar.setBackground(new java.awt.Color(66,66,66));
         subSideBar.setLayout(new BoxLayout(subSideBar, BoxLayout.Y_AXIS));
         sideBar.add(menuButton,  new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,50,50));
         sideBar.add(addPanel,  new org.netbeans.lib.awtextra.AbsoluteConstraints(0,50,205,50));
@@ -259,14 +280,33 @@ public class Home extends javax.swing.JFrame{
                 }
             }
         });
+        contentSearchField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                String input = contentSearchField.getText();
+                updatedList.clear();
+                updateList(input);
+                keywordsListScroll.setVisible(true);
+            }
+        });
+        keywordsList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    String selectedValue = (String) keywordsList.getSelectedValue();
+                    contentSearchField.setText(selectedValue);
+                    keywordsList.clearSelection();
+                    keywordsListScroll.setVisible(false);
+                }
+            }
+        });
         //contentSearchPanel setting
         contentSearchPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         contentSearchPanel.add(contentSearchField, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,157,50));
         contentSearchPanel.add(contentSearchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160,0,50,50));
         //contentScrollBox setting
-        contentBody.setBackground(new java.awt.Color(19, 22, 28));
+        contentBody.setBackground(new java.awt.Color( 48, 48, 48));
         contentBody.setLayout(new java.awt.GridLayout(1,1));
-        conTents.setText("CONTENTS");
         contentBody.setPreferredSize(new Dimension(450, conTents.getPreferredSize().height));
         contentBody.setMaximumSize(new Dimension(450, Integer.MAX_VALUE));
         conTents.setHorizontalAlignment(SwingConstants.LEFT);
@@ -281,6 +321,10 @@ public class Home extends javax.swing.JFrame{
         //add to homepanel
         homePanel.add(titleBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 54));
         homePanel.add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 1000, 54));
+
+        homePanel.add(keywordsListScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 175, 157,-1));
+        keywordsListScroll.setVisible(true);
+
         mainBody.add(sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 500));
         mainBody.add(contentBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 0, 943, 500));
         homePanel.add(mainBody, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 108, 1000, 500));
@@ -521,6 +565,17 @@ public class Home extends javax.swing.JFrame{
 
         contentBody.revalidate();
         contentBody.repaint();
+    }
+    public void updateList(String input){
+        System.out.println(keywords.getSize());
+        for (int i = 0; i < keywords.getSize(); i++) {
+            String keyword = keywords.getElementAt(i);
+            System.out.println(keyword);
+            if (WikipediaAPIRequest.removeDiacritics(keyword.toLowerCase()).contains(input)) {
+
+                updatedList.addElement(keyword);
+            }
+        }
     }
     public static void main(String[] args) {
         try {
