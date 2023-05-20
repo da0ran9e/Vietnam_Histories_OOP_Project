@@ -11,5 +11,8 @@
     <orderEntry type="library" name="json-simple-1.1.1" level="project" />
     <orderEntry type="library" name="AbsoluteLayout-RELEASE170" level="project" />
     <orderEntry type="library" name="org.json" level="project" />
+    <orderEntry type="library" name="selenium-edge-driver-4.9.0" level="project" />
+    <orderEntry type="library" name="selenium-java-4.9.0" level="project" />
+    <orderEntry type="library" name="selenium-server-4.9.0" level="project" />
   </component>
 </module>

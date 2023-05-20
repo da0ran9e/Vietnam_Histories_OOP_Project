@@ -56,7 +56,7 @@ public class WikipediaAPIRequest {
     }
 
     public static void APISearchRequest(String query) {
-        String apiUrl = "https://en.wikipedia.org/w/api.php?action=query" + "&list=" + list.get(0) + "&prop=" + prop.get(3) + "&format=json" + "&srsearch=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(query));
+        String apiUrl = "https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&format=json&srsearch=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(query));
         try {
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
