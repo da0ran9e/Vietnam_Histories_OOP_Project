@@ -78,6 +78,7 @@ public class Home extends javax.swing.JFrame{
 
         try {
             keywords = SeleniumTest.keywordsList();
+            updatedList = SeleniumTest.keywordsList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {
@@ -86,7 +87,6 @@ public class Home extends javax.swing.JFrame{
             throw new RuntimeException(e);
         }
 
-        DefaultListModel<String> updatedList = keywords;
         keywordsList = new JList<>(updatedList);
         keywordsListScroll = new JScrollPane(keywordsList);
         keywordsListScroll.setPreferredSize(new Dimension(157,314));
@@ -285,7 +285,7 @@ public class Home extends javax.swing.JFrame{
             public void keyTyped(KeyEvent e) {
                 String input = contentSearchField.getText();
                 updatedList.clear();
-                updateList(input);
+                updateList(input, keywords);
                 keywordsListScroll.setVisible(true);
             }
         });
@@ -566,13 +566,10 @@ public class Home extends javax.swing.JFrame{
         contentBody.revalidate();
         contentBody.repaint();
     }
-    public void updateList(String input){
-        System.out.println(keywords.getSize());
-        for (int i = 0; i < keywords.getSize(); i++) {
-            String keyword = keywords.getElementAt(i);
-            System.out.println(keyword);
+    public void updateList(String input, DefaultListModel<String> defaultList){
+        for (int i = 0; i < defaultList.getSize(); i++) {
+            String keyword = (String) defaultList.getElementAt(i);
             if (WikipediaAPIRequest.removeDiacritics(keyword.toLowerCase()).contains(input)) {
-
                 updatedList.addElement(keyword);
             }
         }
