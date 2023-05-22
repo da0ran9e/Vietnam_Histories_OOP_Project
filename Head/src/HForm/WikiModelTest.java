@@ -1,5 +1,7 @@
 package HForm;
 
 public class WikiModelTest {
-    String jsonString = "";
+    public static void main(String[] args) {
+        System.out.println(WikipediaAPIRequest.APISearchRequest("Hán Binh Đế"));
+    }
 }

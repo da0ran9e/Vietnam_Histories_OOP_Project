@@ -17,16 +17,16 @@ public class SearchNameJSON {
 
         DefaultListModel<String> keywordsList = SeleniumTest.keywordsList();
         for (int i = 0; i < keywordsList.getSize(); i++) {
-            File filePath = new File("data//"+SeleniumTest.sanitizeFileName(Wikipedia_Crawler.Space2Underscores(WikipediaAPIRequest.removeDiacritics(keywordsList.getElementAt(i).toString())))+"_revisions.json");
+            File filePath = new File("data_categories//"+SeleniumTest.sanitizeFileName(WikipediaAPIRequest.APIBestMatchedSearchRequest(keywordsList.getElementAt(i)).toString())+"_categories.json");
             if (filePath.exists()) System.out.println(filePath+" is already exist!");
             else {
                 JSONObject result = new JSONObject();
+
                 String keyword = (String) keywordsList.getElementAt(i);
                 try{
-                String foundedValues = WikipediaAPIRequest.APIRevisionsDataRequest(Wikipedia_Crawler.Space2Underscores(WikipediaAPIRequest.removeDiacritics(keyword)));
+                JSONArray foundedValues = WikipediaAPIRequest.APICategoriesDataRequest(WikipediaAPIRequest.APIBestMatchedSearchRequest(Wikipedia_Crawler.Space2Underscores(WikipediaAPIRequest.removeDiacritics(keyword))));
                 if(foundedValues==null) continue;
                 result.put(keywordsList.getElementAt(i).toString(),foundedValues);
-
                 try(FileWriter file = new FileWriter(filePath)) {
                     file.write(result.toJSONString());
                 } catch (IOException e) {
