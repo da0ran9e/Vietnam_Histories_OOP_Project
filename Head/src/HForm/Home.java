@@ -1,5 +1,6 @@
 package HForm;
 
+import info.bliki.wiki.model.WikiModel;
 import org.json.JSONException;
 import org.json.simple.parser.ParseException;
 
@@ -473,6 +474,14 @@ public class Home extends javax.swing.JFrame{
         subSideBar.revalidate();
         subSideBar.repaint();
     }
+    public void updateList(String input, DefaultListModel<String> defaultList){
+        for (int i = 0; i < defaultList.getSize(); i++) {
+            String keyword = (String) defaultList.getElementAt(i);
+            if (WikipediaAPIRequest.removeDiacritics(keyword.toLowerCase()).contains(input)) {
+                updatedList.addElement(keyword);
+            }
+        }
+    }
     private void contentSearchButtonMouseEntered(java.awt.event.MouseEvent evt){
         contentSearchButton.setBackground(new java.awt.Color(31, 75, 145));
     }
@@ -500,79 +509,80 @@ public class Home extends javax.swing.JFrame{
         contentBodyUpdate.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         contentBody.add(contentBodyUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 1000));
 
-        javax.swing.JPanel contentBodyText = new javax.swing.JPanel();
-        javax.swing.JPanel contentBodyPic = new javax.swing.JPanel();
-        contentBodyText.setBackground(new java.awt.Color(0, 242, 255));
-        contentBodyPic.setBackground(new java.awt.Color(0, 255, 21));
-        contentBodyText.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        contentBodyPic.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        List<String> strList = Wikipedia_Crawler.Go(name);
-        List<String> contentList = Wikipedia_Crawler.mainContents(name);
-
-        int textID=0;
-        int contentID=0;
-
-        javax.swing.JPanel newTextPanel = new javax.swing.JPanel(new java.awt.GridLayout(strList.size(),1));
-        newTextPanel.setSize(440, 1000);
-        javax.swing.JScrollPane newScrollText = new javax.swing.JScrollPane(newTextPanel);
-        for(String data:strList){
-            javax.swing.JPanel textPanel_p = new javax.swing.JPanel();
-            textPanel_p.setName("text " + ++textID);
-            javax.swing.JLabel  text_p = new javax.swing.JLabel("<html>"+data+"</html>", SwingConstants.LEFT);
-            textPanel_p.add(text_p, LEFT_ALIGNMENT);
-            newTextPanel.add(textPanel_p);
-        }
-        for(String content:contentList){
-            javax.swing.JPanel contentPanel_p = new javax.swing.JPanel();
-            contentPanel_p.setName("content " + ++contentID);
-            javax.swing.JLabel  content_p = new javax.swing.JLabel("<html><p>"+content+"</p></html>", SwingConstants.LEFT);
-            content_p.setHorizontalAlignment(SwingConstants.LEFT);
-            contentPanel_p.add(content_p);
-            newTextPanel.add(contentPanel_p);
-        }
-
-        List<String> imgList = Wikipedia_Crawler.getImage(name);
-
-        int imgID=0;
-        javax.swing.JPanel newImgPanel = new javax.swing.JPanel(new java.awt.GridLayout(imgList.size(),1));
-        javax.swing.JScrollPane newScrollImg = new javax.swing.JScrollPane(newImgPanel);
-        newScrollImg.setPreferredSize(new Dimension(447, 450));
-        newScrollImg.getVerticalScrollBar().setBlockIncrement(500);
-        for(String img:imgList){
-            try{
-                URL url = new URL(img);
-                BufferedImage image = ImageIO.read(url);
-                System.out.println(image.getWidth());
-                if(image.getHeight()>100){
-                    javax.swing.JPanel imgPanel_p = new javax.swing.JPanel();
-                    imgPanel_p.setName("img " + ++imgID);
-                    javax.swing.JLabel imageLabel = new javax.swing.JLabel();
-                    imageLabel.setIcon(new javax.swing.ImageIcon(image.getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
-
-                    imgPanel_p.add(imageLabel);
-                    newImgPanel.add(imgPanel_p);
-                }
-            }catch (IOException e){
-                throw e;
-            }
-        }
-        contentBodyText.add(newScrollText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 495, 400));
-        contentBodyPic.add(newScrollImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 400));
-
-        contentBodyUpdate.add(contentBodyText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 1000));
-        contentBodyUpdate.add(contentBodyPic, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 1000));
+        String contents = WikipediaAPIRequest.APIRevisionsDataRequest(name);
+        WikiModel wikiModel = new WikiModel("https://en.wikipedia.org/wiki/${image}", "https://en.wikipedia.org/wiki/${title}");
+        String htmlContents = wikiModel.render(contents);
+        javax.swing.JLabel conTents = new javax.swing.JLabel("<html>"+htmlContents+"</html>");
+        javax.swing.JScrollPane contentS = new javax.swing.JScrollPane(conTents);
+        contentS.setPreferredSize(new Dimension(1000, 400));
+        contentBodyUpdate.add(contentS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0,0,950, 400));
+//
+//        javax.swing.JPanel contentBodyText = new javax.swing.JPanel();
+//        javax.swing.JPanel contentBodyPic = new javax.swing.JPanel();
+//        contentBodyText.setBackground(new java.awt.Color(0, 242, 255));
+//        contentBodyPic.setBackground(new java.awt.Color(0, 255, 21));
+//        contentBodyText.setLayout(new GridLayout(1,1));
+//        contentBodyPic.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+//
+//        List<String> strList = Wikipedia_Crawler.Go(name);
+//        List<String> contentList = Wikipedia_Crawler.mainContents(name);
+//
+//        int textID=0;
+//        int contentID=0;
+//
+//        javax.swing.JPanel newTextPanel = new javax.swing.JPanel(new java.awt.GridLayout(strList.size(),1));
+//        newTextPanel.setSize(440, 1000);
+//        javax.swing.JScrollPane newScrollText = new javax.swing.JScrollPane(newTextPanel);
+//
+//        for(String data:strList){
+//            javax.swing.JPanel textPanel_p = new javax.swing.JPanel();
+//            textPanel_p.setName("text " + ++textID);
+//            javax.swing.JLabel  text_p = new javax.swing.JLabel("<html>"+data+"</html>", SwingConstants.LEFT);
+//            textPanel_p.add(text_p, LEFT_ALIGNMENT);
+//            newTextPanel.add(textPanel_p);
+//        }
+//        for(String content:contentList){
+//            javax.swing.JPanel contentPanel_p = new javax.swing.JPanel();
+//            contentPanel_p.setName("content " + ++contentID);
+//            javax.swing.JLabel  content_p = new javax.swing.JLabel("<html><p>"+content+"</p></html>", SwingConstants.LEFT);
+//            content_p.setHorizontalAlignment(SwingConstants.LEFT);
+//            contentPanel_p.add(content_p);
+//            newTextPanel.add(contentPanel_p);
+//        }
+//
+//        List<String> imgList = Wikipedia_Crawler.getImage(name);
+//
+//        int imgID=0;
+//        javax.swing.JPanel newImgPanel = new javax.swing.JPanel(new java.awt.GridLayout(imgList.size(),1));
+//        javax.swing.JScrollPane newScrollImg = new javax.swing.JScrollPane(newImgPanel);
+//        newScrollImg.setPreferredSize(new Dimension(447, 450));
+//        newScrollImg.getVerticalScrollBar().setBlockIncrement(500);
+//        for(String img:imgList){
+//            try{
+//                URL url = new URL(img);
+//                BufferedImage image = ImageIO.read(url);
+//                System.out.println(image.getWidth());
+//                if(image.getHeight()>100){
+//                    javax.swing.JPanel imgPanel_p = new javax.swing.JPanel();
+//                    imgPanel_p.setName("img " + ++imgID);
+//                    javax.swing.JLabel imageLabel = new javax.swing.JLabel();
+//                    imageLabel.setIcon(new javax.swing.ImageIcon(image.getScaledInstance(400, 400, Image.SCALE_SMOOTH)));
+//
+//                    imgPanel_p.add(imageLabel);
+//                    newImgPanel.add(imgPanel_p);
+//                }
+//            }catch (IOException e){
+//                throw e;
+//            }
+//        }
+//        contentBodyText.add(newScrollText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 495, 400));
+//        contentBodyPic.add(newScrollImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 400));
+//
+//        contentBodyUpdate.add(contentBodyText, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 1000));
+//        contentBodyUpdate.add(contentBodyPic, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 500, 1000));
 
         contentBody.revalidate();
         contentBody.repaint();
-    }
-    public void updateList(String input, DefaultListModel<String> defaultList){
-        for (int i = 0; i < defaultList.getSize(); i++) {
-            String keyword = (String) defaultList.getElementAt(i);
-            if (WikipediaAPIRequest.removeDiacritics(keyword.toLowerCase()).contains(input)) {
-                updatedList.addElement(keyword);
-            }
-        }
     }
     public static void main(String[] args) {
         try {

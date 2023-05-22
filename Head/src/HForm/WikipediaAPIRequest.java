@@ -55,8 +55,10 @@ public class WikipediaAPIRequest {
         return removedSignsText;
     }
 
-    public static void APISearchRequest(String query) {
-        String apiUrl = "https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&format=json&srsearch=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(query));
+    public static List<JSONObject> APISearchRequest(String query) {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&list=search&prop=info&format=json&srsearch=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(query));
+        List<JSONObject> foundedValue = new ArrayList<>();
+
         try {
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -86,7 +88,12 @@ public class WikipediaAPIRequest {
                     long pageID = (long) result.get("pageid");
                     String title = (String) result.get("title");
                     String snippet = (String) result.get("snippet");
-                    System.out.println(pageID + " : " + title + " : " + snippet);
+                    JSONObject matched =new JSONObject();
+                    matched.put("pageid", pageID);
+                    matched.put("title", title);
+                    matched.put("snippet", snippet);
+                    foundedValue.add(matched);
+                    System.out.println(matched.toString());
                 }
 
             }
@@ -96,6 +103,7 @@ public class WikipediaAPIRequest {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+        return foundedValue;
     }
 
     public static void APIImageRequest(String title, long pageid) {
@@ -177,8 +185,9 @@ public class WikipediaAPIRequest {
         }
     }
 
-    public static void APIRevisionsDataRequest(String title, long pageid) {
-        String apiUrl = "https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(title));
+    public static String APIRevisionsDataRequest(String title) {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(title));
+        String mainContent = new String();
         try {
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -203,20 +212,22 @@ public class WikipediaAPIRequest {
 
                 JSONObject results = (JSONObject) jsonObject.get("query");
                 JSONObject pages = (JSONObject) results.get("pages");
-                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+//                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+                String pageid = (String) pages.keySet().iterator().next();
+                JSONObject pageId = (JSONObject) pages.get(pageid);
                 JSONArray revisions = (JSONArray) pageId.get("revisions");
                 for (Object row : revisions) {
                     JSONObject revision = (JSONObject) row;
-                    String mainContent = (String) revision.get("*");
+                    mainContent = (String) revision.get("*");
                     System.out.println(mainContent);
                 }
             }
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return null;
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            return null;
         }
+        return mainContent;
     }
 
     public static String testDateAnalyze(String title, long pageid) {

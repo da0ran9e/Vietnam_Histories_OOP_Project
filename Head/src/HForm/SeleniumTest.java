@@ -20,6 +20,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class SeleniumTest {
+    public static String sanitizeFileName(String fileName) {
+        // Define a set of invalid characters not allowed in file names
+        String invalidChars = "\\/:*?\"<>|";
+
+        // Replace each invalid character with an empty string
+        for (char c : invalidChars.toCharArray()) {
+            fileName = fileName.replace(c, '_');
+        }
+
+        return fileName;
+    }
     public static void seleniumEdge(){
         System.setProperty("webdriver.edge.driver", "msedgedriver.exe");
         WebDriver driver = new EdgeDriver();
@@ -38,7 +49,7 @@ public class SeleniumTest {
                         String title = headingElement.select("a").attr("title");
 
                         JSONObject keyword = new JSONObject();
-                        keyword.put(i, title);
+                        keyword.put("name", title);
                         keywordArray.add(keyword);
 
                         System.out.println(title);
@@ -50,7 +61,7 @@ public class SeleniumTest {
         }
 
             keywords.put("Keywords", keywordArray);
-            try (FileWriter file = new FileWriter("b_years.json")) {
+            try (FileWriter file = new FileWriter("dList.json")) {
                 file.write(keywords.toJSONString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -60,12 +71,12 @@ public class SeleniumTest {
         DefaultListModel<String> list = new DefaultListModel<>();
         try{
             JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("most_relevant_keywords.json"));
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("dList.json"));
 
             JSONArray keyList = (JSONArray) jsonObject.get("Keywords");
             for(Object keyword:keyList){
                 JSONObject key = (JSONObject) keyword;
-                String word = (String) key.get("key");
+                String word = (String) key.get("name");
                 list.addElement(word);
             }
         } catch (IOException e) {
