@@ -131,7 +131,7 @@ public class Home extends javax.swing.JFrame{
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setFont(new java.awt.Font("Calibri", 1, 22));
         title.setForeground(new java.awt.Color(255, 255, 255));
-        title.setText("Catalogs");
+        title.setText("<html><h><b>Wikraps</b></h></html>");
         titleBar.add(title, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 150, 50));
         //buttons setting
         closeButton.setBackground(new java.awt.Color(19, 22, 28));
@@ -324,7 +324,7 @@ public class Home extends javax.swing.JFrame{
         homePanel.add(searchBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 54, 1000, 54));
 
         homePanel.add(keywordsListScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 175, 157,-1));
-        keywordsListScroll.setVisible(true);
+        keywordsListScroll.setVisible(false);
 
         mainBody.add(sideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 500));
         mainBody.add(contentBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 0, 943, 500));

@@ -208,6 +208,94 @@ public class WikipediaAPIRequest {
     }
 
     public static String APIRevisionsDataRequest(String title) {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + Wikipedia_Crawler.Space2Underscores(removeDiacritics(title));
+        String mainContent = new String();
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Create a BufferedReader to read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                // Read the response line by line
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                // Print the response
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(response.toString());
+                JSONObject jsonObject = (JSONObject) obj;
+
+                JSONObject results = (JSONObject) jsonObject.get("query");
+                JSONObject pages = (JSONObject) results.get("pages");
+//                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+                String pageid = (String) pages.keySet().iterator().next();
+                JSONObject pageId = (JSONObject) pages.get(pageid);
+                JSONArray revisions = (JSONArray) pageId.get("revisions");
+                for (Object row : revisions) {
+                    JSONObject revision = (JSONObject) row;
+                    mainContent = (String) revision.get("*");
+                    System.out.println(mainContent);
+                }
+            }
+        } catch (IOException e) {
+            return null;
+        } catch (ParseException e) {
+            return null;
+        }
+        return mainContent;
+    }
+    public static String APIRevisionsDataRequestV2(String title) {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + Wikipedia_Crawler.Space2Underscores(title);
+        String mainContent = new String();
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Create a BufferedReader to read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                // Read the response line by line
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                // Print the response
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(response.toString());
+                JSONObject jsonObject = (JSONObject) obj;
+
+                JSONObject results = (JSONObject) jsonObject.get("query");
+                JSONObject pages = (JSONObject) results.get("pages");
+//                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+                String pageid = (String) pages.keySet().iterator().next();
+                JSONObject pageId = (JSONObject) pages.get(pageid);
+                JSONArray revisions = (JSONArray) pageId.get("revisions");
+                for (Object row : revisions) {
+                    JSONObject revision = (JSONObject) row;
+                    mainContent = (String) revision.get("*");
+                    System.out.println(mainContent);
+                }
+            }
+        } catch (IOException e) {
+            return null;
+        } catch (ParseException e) {
+            return null;
+        }
+        return mainContent;
+    }
+    public static String APIRevisionsDataRequestV1(String title) {
         String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + Wikipedia_Crawler.Space2Underscores(convertVi2En(removeDiacritics(title)));
         String mainContent = new String();
         try {
@@ -246,6 +334,32 @@ public class WikipediaAPIRequest {
             }
         } catch (IOException e) {
             return null;
+        } catch (ParseException e) {
+            return null;
+        }
+        return mainContent;
+    }
+    public static String APIRevisionsDataRequestFinal(String title) {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + title;
+        String mainContent = new String();
+        try {
+                String response = SeleniumTest.seleniumPackup(apiUrl);
+                // Print the response
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(response.toString());
+                JSONObject jsonObject = (JSONObject) obj;
+
+                JSONObject results = (JSONObject) jsonObject.get("query");
+                JSONObject pages = (JSONObject) results.get("pages");
+//                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+                String pageid = (String) pages.keySet().iterator().next();
+                JSONObject pageId = (JSONObject) pages.get(pageid);
+                JSONArray revisions = (JSONArray) pageId.get("revisions");
+                for (Object row : revisions) {
+                    JSONObject revision = (JSONObject) row;
+                    mainContent = (String) revision.get("*");
+                    System.out.println(mainContent);
+                }
         } catch (ParseException e) {
             return null;
         }
