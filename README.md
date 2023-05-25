@@ -2,7 +2,12 @@
 ![Test_run](https://github.com/da0ran9e/Data_Crawler_OOP_Project/assets/98570451/4d210e41-7888-4c03-b064-584ecd23df56)
 Object-Oriented Programming <br />
 This program is used to search Vietnamese history informations which are taken from Wikipedia database until June2023
-# Wikipedia page crawler
+## Target:
+- Practice to deepen understanding of Java programing language. (build a completed Java application with GUI, database)
+- Improve historical knowledge
+- Learn how to organize a system of objects (persons, events, locations, ect.) with Java.
+- Learn how to create a javax.swing GUI for application without any auto-UI-designing program. (write the application line by line) 
+# Wikipedia pages crawler
 This program crawls the content of Wikipedia pages and stores it in a JSON file. It uses the Jsoup library to parse HTML and retrieve the content of Wikipedia pages. The program takes as input a JSON file that contains a list of Wikipedia page URLs and their titles. For each page, the program retrieves the page content and stores it in a separate JSON file. The JSON file contains the title of the page and its main sections and paragraphs.
 ## Prerequisite libraries:
 - jsoup-1.15.4
