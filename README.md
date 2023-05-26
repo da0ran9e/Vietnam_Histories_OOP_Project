@@ -19,4 +19,5 @@ This program crawls the content of Wikipedia pages and stores it in a JSON file.
 - info.bliki.wiki.pdf
 - org.json
 ## How it work:
-
+Data crawling and scraping: <br/>
+- Start from a category, using DFS to travel to all category members
