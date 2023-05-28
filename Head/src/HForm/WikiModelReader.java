@@ -46,7 +46,7 @@ public class WikiModelReader {
 //        System.out.println(htmlContent);
         JFrame app = new JFrame();
         app.setSize(new Dimension(500, 800));
-        JLabel label = new JLabel("<html>"+wikimarkupReader("test Hồ Chí Minh")+"</html>");
+        JLabel label = new JLabel("<html>"+wikimarkupReader("Nhạc Phi")+"</html>");
         JScrollPane scroll = new JScrollPane(label);
         app.add(scroll);
         app.setVisible(true);
