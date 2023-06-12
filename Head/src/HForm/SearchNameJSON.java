@@ -124,7 +124,39 @@ public class SearchNameJSON {
         }
 
     }
+     public static void SaveJSONV3() throws JSONException, IOException, ParseException {
+
+        DefaultListModel<String> keywordsList = SeleniumTest.keywordsListV2();
+        for (int i = 0; i < keywordsList.getSize(); i++) {
+            File filePath = new File("data//"+SeleniumTest.sanitizeFileName(keywordsList.getElementAt(i)).toString()+"_revisions.json");
+            System.out.println(filePath);
+            if (filePath.exists()) System.out.println(filePath+" is already exist!");
+            else {
+                JSONObject result = new JSONObject();
+
+                String keyword = (String) keywordsList.getElementAt(i);
+                try{
+                String foundedValues = WikipediaAPIRequest.APIRevisionsDataRequestFinal(keyword);//WikipediaAPIRequest.APIRevisionsDataRequestV2(keyword);
+                if(foundedValues.length()<100)
+                {
+                    continue;
+                }
+                result.put(keywordsList.getElementAt(i).toString(),foundedValues);
+                try(FileWriter file = new FileWriter(filePath)) {
+                    file.write(result.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                } catch (RuntimeException e) {
+                    continue;
+                }
+            }
+
+        }
+
+    }
     public static void main(String[] args) throws JSONException, IOException, ParseException {
-        SaveJSONV1();
+        System.out.println(WikipediaAPIRequest.APIRevisionsDataRequestV3("Trần Tử Bình"));
     }
 }

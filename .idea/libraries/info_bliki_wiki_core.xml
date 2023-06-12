@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="info.bliki.wiki.core" type="repository">
+    <properties maven-id="info.bliki.wiki:bliki-core:3.0.19" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/info/bliki/wiki/bliki-core/3.0.19/bliki-core-3.0.19.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.2/commons-codec-1.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-compress/1.4.1/commons-compress-1.4.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/tukaani/xz/1.0/xz-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

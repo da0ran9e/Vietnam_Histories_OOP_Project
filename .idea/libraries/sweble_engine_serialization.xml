@@ -1,0 +1,29 @@
+<component name="libraryTable">
+  <library name="sweble.engine.serialization" type="repository">
+    <properties maven-id="org.sweble.engine:sweble-engine-serialization:3.1.9" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/engine/sweble-engine-serialization/3.1.9/sweble-engine-serialization-3.1.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/1.4/commons-io-1.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/wikitext/swc-parser-lazy/3.1.9/swc-parser-lazy-3.1.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/xtc/rats-runtime/1.15.0/rats-runtime-1.15.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/de/fau/cs/osr/utils/utils/3.0.8/utils-3.0.8.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.6/commons-codec-1.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/de/fau/cs/osr/ptk/ptk-common/3.0.8/ptk-common-3.0.8.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/wikitext/swc-engine/3.1.9/swc-engine-3.1.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/sun/xml/bind/jaxb-impl/2.2.5/jaxb-impl-2.2.5.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/wom3/sweble-wom3-core/3.1.9/sweble-wom3-core-3.1.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.3/joda-time-2.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/wom3/sweble-wom3-json-tools/3.1.9/sweble-wom3-json-tools-3.1.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/wom3/sweble-wom3-swc-adapter/3.1.9/sweble-wom3-swc-adapter-3.1.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

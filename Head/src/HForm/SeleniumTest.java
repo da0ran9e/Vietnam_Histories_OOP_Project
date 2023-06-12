@@ -524,9 +524,33 @@ public class SeleniumTest {
 
         return list;
     }
+    public static DefaultListModel<String> keywordsListV3() throws IOException, ParseException, JSONException {
+        DefaultListModel<String> list = new DefaultListModel<>();
+        try{
+            JSONParser parser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("PagesMappedName.json"));
+            JSONArray keyList = (JSONArray) jsonObject.get("pages");
+            for(Object keyword:keyList){
+                JSONObject key = (JSONObject) keyword;
+                String word = (String) key.get("name");
+                list.addElement(word);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
-    public static void main(String[] args) {
-        seleniumV100Edge();
+        return list;
+    }
+
+    public static void main(String[] args) throws JSONException, IOException, ParseException {
+        DefaultListModel<String> list = keywordsListV3();
+//        for (int i=0;i<list.getSize(); i++){
+//            System.out.println();
+//            WikipediaAPIRequest.APIRevisionsDataRequestV4(list.elementAt(i));
+//        }
+        WikipediaAPIRequest.APIRevisionsDataRequestV5( list);
     }
 }
 

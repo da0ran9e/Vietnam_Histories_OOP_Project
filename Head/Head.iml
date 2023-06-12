@@ -17,5 +17,10 @@
     <orderEntry type="library" name="bliki-core-3.0.19-javadoc1" level="project" />
     <orderEntry type="library" name="info.bliki.wiki.pdf" level="project" />
     <orderEntry type="library" name="org.json1" level="project" />
+    <orderEntry type="library" name="info.bliki.wiki.core" level="project" />
+    <orderEntry type="library" name="info.bliki.wiki.addons" level="project" />
+    <orderEntry type="library" name="bliki-core-3.0.19-javadoc2" level="project" />
+    <orderEntry type="library" name="sweble.wikitext.swc.parser.lazy" level="project" />
+    <orderEntry type="library" name="sweble.engine.serialization" level="project" />
   </component>
 </module>

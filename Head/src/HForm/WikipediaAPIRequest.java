@@ -1,5 +1,6 @@
 package HForm;
 
+import org.asynchttpclient.ListenableFuture;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,16 +10,14 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class WikipediaAPIRequest {
@@ -339,6 +338,105 @@ public class WikipediaAPIRequest {
         }
         return mainContent;
     }
+    public static List<String> APIRevisionsDataRequestV3(String title) {
+        String apiUrl = null;
+        try{
+            apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + URLEncoder.encode(title, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+        List<String> mainContents = new ArrayList<>();
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Create a BufferedReader to read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                // Read the response line by line
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                // Print the response
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(response.toString());
+                JSONObject jsonObject = (JSONObject) obj;
+
+                JSONObject results = (JSONObject) jsonObject.get("query");
+                JSONObject pages = (JSONObject) results.get("pages");
+//                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+                String pageid = (String) pages.keySet().iterator().next();
+                JSONObject pageId = (JSONObject) pages.get(pageid);
+                JSONArray revisions = (JSONArray) pageId.get("revisions");
+                for (Object row : revisions) {
+                    JSONObject revision = (JSONObject) row;
+                }
+            }
+        } catch (IOException e) {
+            return null;
+        } catch (ParseException e) {
+            return null;
+        }
+        return mainContents;
+    }
+    public static String APIRevisionsDataRequestV4(String title) throws UnsupportedEncodingException {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + title;
+        String mainContent = new String();
+        File filePath = new File("Category_data//"+ URLDecoder.decode(title, "UTF-8") +".json");
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Create a BufferedReader to read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                // Read the response line by line
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+                reader.close();
+                // Print the response
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(response.toString());
+                JSONObject jsonObject = (JSONObject) obj;
+
+                JSONObject results = (JSONObject) jsonObject.get("query");
+                JSONObject pages = (JSONObject) results.get("pages");
+//                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+                String pageid = (String) pages.keySet().iterator().next();
+                JSONObject pageId = (JSONObject) pages.get(pageid);
+                JSONArray revisions = (JSONArray) pageId.get("revisions");
+                JSONObject data = new JSONObject();
+                for (Object row : revisions) {
+                    JSONObject revision = (JSONObject) row;
+                    mainContent = (String) revision.get("*");
+                    System.out.println(mainContent);
+                    data.put(pageid, mainContent);
+                }
+                 try(FileWriter file = new FileWriter(filePath)) {
+                    file.write(data.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } catch (IOException e) {
+            return null;
+        } catch (ParseException e) {
+            return null;
+        }
+        return mainContent;
+    }
     public static String APIRevisionsDataRequestFinal(String title) {
         String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + title;
         String mainContent = new String();
@@ -434,5 +532,88 @@ public class WikipediaAPIRequest {
             throw new RuntimeException(e);
         }
         return keyword;
+    }
+    public static void APIRevisionsDataRequestV5(DefaultListModel<String> titles) {
+        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=";
+        try {
+            int size = titles.size();
+            for (int i=size; i>=0; i--) {
+                String title = titles.get(i);
+                apiUrl += title + "|";
+                size-=20;
+            }
+            apiUrl = apiUrl.substring(0, apiUrl.length() - 1);
+            URL url = new URL(apiUrl);
+            //System.out.println(url);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Create a BufferedReader to read the response
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                // Read the response line by line
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                    System.out.println(line);
+                }
+                reader.close();
+            }
+        } catch (IOException e) {
+        }
+
+//        String apiUrl = "https://vi.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=content&format=json&titles=" + title;
+//        String mainContent = new String();
+//        File filePath = new File("Category_data//"+ URLDecoder.decode(title, "UTF-8") +".json");
+//        try {
+//            URL url = new URL(apiUrl);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setRequestMethod("GET");
+//
+//            int responseCode = connection.getResponseCode();
+//            if (responseCode == HttpURLConnection.HTTP_OK) {
+//                // Create a BufferedReader to read the response
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+//                String line;
+//                StringBuilder response = new StringBuilder();
+//
+//                // Read the response line by line
+//                while ((line = reader.readLine()) != null) {
+//                    response.append(line);
+//                }
+//                reader.close();
+//                // Print the response
+//                JSONParser parser = new JSONParser();
+//                Object obj = parser.parse(response.toString());
+//                JSONObject jsonObject = (JSONObject) obj;
+//
+//                JSONObject results = (JSONObject) jsonObject.get("query");
+//                JSONObject pages = (JSONObject) results.get("pages");
+////                JSONObject pageId = (JSONObject) pages.get("" + pageid);
+//                String pageid = (String) pages.keySet().iterator().next();
+//                JSONObject pageId = (JSONObject) pages.get(pageid);
+//                JSONArray revisions = (JSONArray) pageId.get("revisions");
+//                JSONObject data = new JSONObject();
+//                for (Object row : revisions) {
+//                    JSONObject revision = (JSONObject) row;
+//                    mainContent = (String) revision.get("*");
+//                    System.out.println(mainContent);
+//                    data.put(pageid, mainContent);
+//                }
+//                 try(FileWriter file = new FileWriter(filePath)) {
+//                    file.write(data.toJSONString());
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        } catch (IOException e) {
+//            return null;
+//        } catch (ParseException e) {
+//            return null;
+//        }
+//        return mainContent;
     }
 }

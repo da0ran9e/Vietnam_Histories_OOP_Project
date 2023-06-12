@@ -227,7 +227,7 @@ public class CategoriesLoader {
                                     pageTitle.contains("Rap")||pageTitle.contains("Vụ án")||
                                     pageTitle.contains("ca sĩ")|| pageTitle.length()==0)
                                 continue;
-                            obj.put("name", pageLink);
+                            obj.put("name", pageLink.substring(30));
                             if(listPg.contains(obj))continue;
                             listPg.add(obj);
                             count++;
@@ -238,7 +238,7 @@ public class CategoriesLoader {
             }
         }
         listFile.put("pages", listPg);
-        try (FileWriter fileWriter = new FileWriter("PagesLink.json")) {
+        try (FileWriter fileWriter = new FileWriter("PagesName.json")) {
                                     fileWriter.write(listFile.toJSONString());
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
@@ -326,8 +326,65 @@ public class CategoriesLoader {
         }
     }
 
+    public static void FoldersLoaderV6() throws IOException, ParseException {
+        int count = 0;
+        JSONObject listFile = new JSONObject();
+        JSONArray listPg = new JSONArray();
+
+        File folder = new File("Pages");
+        if(folder.exists()&&folder.isDirectory()){
+            File[] files = folder.listFiles(); // Get an array of all files in the folder
+
+            if (files != null) {
+                // Iterate over the files and print their names
+                for (File file : files) {
+                    if (file.isFile()) {
+                        JSONParser parser = new JSONParser();
+                        JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+
+                        String fileName = file.getName();
+                        String categoryName = fileName.substring(9, fileName.length()-5);
+                        JSONArray pagesList = (JSONArray) jsonObject.get(categoryName);
+
+                        Stack<String> pageStack = new Stack<>();
+                        Stack<String> linkStack = new Stack<>();
+                        for(Object page:pagesList){
+                            JSONObject name = (JSONObject) page;
+                            String word = (String) name.get("page");
+                            if (word!=null) pageStack.push(word);
+                            String link = (String) name.get("link");
+                            if (link!=null) linkStack.push(link);
+                        }
+
+                        while(!pageStack.empty()&&!linkStack.empty()) {
+                            String pageTitle = pageStack.pop();
+                            String pageLink = linkStack.pop();
+
+                            JSONObject obj = new JSONObject();
+                            if(pageTitle.contains("Bản mẫu")){
+
+                            obj.put("name", pageLink.substring(30));
+                            if(listPg.contains(obj))continue;
+                            listPg.add(obj);
+                            count++;
+                            System.out.println("Total "+count+" objects added!");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        listFile.put("pages", listPg);
+        try (FileWriter fileWriter = new FileWriter("PagesTemplates.json")) {
+                                    fileWriter.write(listFile.toJSONString());
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+    }
+
+
     public static void main(String[] args) throws IOException, ParseException {
-        FoldersLoaderV5();
+        FoldersLoaderV6();
     }
 
 }

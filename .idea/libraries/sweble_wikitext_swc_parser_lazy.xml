@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="sweble.wikitext.swc.parser.lazy" type="repository">
+    <properties maven-id="org.sweble.wikitext:swc-parser-lazy:3.1.9" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/sweble/wikitext/swc-parser-lazy/3.1.9/swc-parser-lazy-3.1.9.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/1.4/commons-io-1.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/xtc/rats-runtime/1.15.0/rats-runtime-1.15.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/de/fau/cs/osr/utils/utils/3.0.8/utils-3.0.8.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.6/commons-codec-1.6.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/de/fau/cs/osr/ptk/ptk-common/3.0.8/ptk-common-3.0.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bliki-core-3.0.19-javadoc2">
+    <CLASSES />
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/bliki-core-3.0.19-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
