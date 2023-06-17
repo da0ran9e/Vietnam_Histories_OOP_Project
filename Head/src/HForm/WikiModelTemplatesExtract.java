@@ -166,11 +166,11 @@ public class WikiModelTemplatesExtract {
                 JSONObject resultJson = new JSONObject();
                 JSONArray jsonArray = new JSONArray();
                 for (String template : templates) {
-                    //jsonArray.put(template);
+                    jsonArray.add(template);
                 }
                 resultJson.put(pageId, jsonArray);
 
-                File resultFile = new File("Templates_data//" + file.getName()+".json");
+                File resultFile = new File("Templates_data//" + file.getName());
                 System.out.println(resultFile.getAbsolutePath());
                 try(FileWriter fileWriter = new FileWriter(resultFile)) {
                     fileWriter.write(resultJson.toJSONString());
@@ -246,6 +246,55 @@ public static void filteringV1() throws IOException, ParseException, JSONExcepti
         }
 
     }
+    public static void filteringV3() throws IOException, ParseException {
+        File folder = new File("Templates_data");
+        if(folder.exists()&&folder.isDirectory()) {
+            File[] listOfFiles = folder.listFiles();
+            List<String> templatesList = new ArrayList<>();
+            Map<String, Integer> templatesUsing = new HashMap<>();
+            for (File file : listOfFiles) {
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+                String pageId = (String) jsonObject.keySet().iterator().next();
+                JSONArray templates = (JSONArray) jsonObject.get(pageId);
+
+//                JSONObject resultJson = new JSONObject();
+//                JSONObject templateJson = new JSONObject();
+                for (Object template : templates) {
+                    String temp = template.toString();
+                    if(temp.indexOf("{{")!=-1&&temp.indexOf("|")!=-1){
+                        String tempName = temp.substring(2, temp.indexOf("|")).replaceAll("\\n$", "").trim();;
+                        if(!templatesList.contains(tempName)){
+                            templatesList.add(tempName);
+                        }
+                        if(!templatesUsing.containsKey(tempName)){
+                        templatesUsing.put(tempName, 0);
+                        }
+                        else{
+                            templatesUsing.replace(tempName, templatesUsing.get(tempName)+1);
+                        }
+                    }
+                    //System.out.println(tempName);
+                }
+
+
+
+//                File resultFile = new File("Prefiltered_templates_data//" + file.getName());
+//                //System.out.println(resultFile.getAbsolutePath());
+//                try(FileWriter fileWriter = new FileWriter(resultFile)) {
+//                    fileWriter.write(resultJson.toJSONString());
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+            }
+                Collections.sort(templatesList);
+                for (String s:templatesList){
+                    System.out.println(s);
+                }
+                System.out.println(templatesUsing);
+        }
+
+    }
     public static void main(String[] args) {
         String input = "";
         //List<String> substrings = extractSubstrings(input);
@@ -256,7 +305,7 @@ public static void filteringV1() throws IOException, ParseException, JSONExcepti
         //System.out.println(input);
 //        System.out.println(extractSubstringsV2(input).size());
         try{
-            filteringV2();
+            filteringV3();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {
