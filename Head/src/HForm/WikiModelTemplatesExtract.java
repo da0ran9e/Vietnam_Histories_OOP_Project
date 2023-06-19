@@ -268,7 +268,7 @@ public static void filteringV1() throws IOException, ParseException, JSONExcepti
                             templatesList.add(tempName);
                         }
                         if(!templatesUsing.containsKey(tempName)){
-                        templatesUsing.put(tempName, 0);
+                        templatesUsing.put(tempName, 1);
                         }
                         else{
                             templatesUsing.replace(tempName, templatesUsing.get(tempName)+1);
@@ -288,10 +288,44 @@ public static void filteringV1() throws IOException, ParseException, JSONExcepti
 //                }
             }
                 Collections.sort(templatesList);
-                for (String s:templatesList){
-                    System.out.println(s);
-                }
+//                for (String s:templatesList){
+//                    System.out.println(s);
+//                }
                 System.out.println(templatesUsing);
+                JSONObject mapTemplate = new JSONObject();
+                JSONArray templatesArray = new JSONArray();
+
+                // Convert HashMap to List of Map entries
+                List<Map.Entry<String, Integer>> list = new ArrayList<>(templatesUsing.entrySet());
+
+        // Sort the List by values using a custom Comparator
+                Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+                    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                // Sort in ascending order (change o1 and o2 to reverse the order)
+                    return o1.getValue().compareTo(o2.getValue());
+                    }
+                });
+
+        // Create a LinkedHashMap to preserve the sorted order
+                LinkedHashMap<String, Integer> sortedHashMap = new LinkedHashMap<>();
+                for (Map.Entry<String, Integer> entry : list) {
+                    sortedHashMap.put(entry.getKey(), entry.getValue());
+                }
+
+        // Print the sorted HashMap
+                for (Map.Entry<String, Integer> entry : sortedHashMap.entrySet()) {
+                    JSONObject json = new JSONObject();
+                    json.put(entry.getKey(), entry.getValue());
+                    templatesArray.add(json);
+                }
+                mapTemplate.put("used", templatesArray);
+                File resultFile = new File("sorted_templates_used.json");
+                //System.out.println(resultFile.getAbsolutePath());
+                try(FileWriter fileWriter = new FileWriter(resultFile)) {
+                    fileWriter.write(mapTemplate.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
         }
 
     }
