@@ -113,7 +113,7 @@ public class WikiModelTemplatesExtract {
             if (input.charAt(i-1) != '{' && input.charAt(i) == '{' && input.charAt(i+1) == '{' && input.charAt(i+2) != '}') {
                 startIndexes.push(i);
             }
-            if (input.charAt(i-1) != '}'&& input.charAt(i) == '}' && input.charAt(i+1) == '}' && input.charAt(i+2) != '}') {
+            if (input.charAt(i) == '}' && input.charAt(i+1) == '}') {
                 try{
                     int startIndex = startIndexes.pop();
                     substrings.add(input.substring(startIndex, i+2));
@@ -170,7 +170,7 @@ public class WikiModelTemplatesExtract {
                 }
                 resultJson.put(pageId, jsonArray);
 
-                File resultFile = new File("Templates_data//" + file.getName());
+                File resultFile = new File("Templates_data2//" + file.getName());
                 System.out.println(resultFile.getAbsolutePath());
                 try(FileWriter fileWriter = new FileWriter(resultFile)) {
                     fileWriter.write(resultJson.toJSONString());
@@ -329,17 +329,142 @@ public static void filteringV1() throws IOException, ParseException, JSONExcepti
         }
 
     }
+        public static void filteringV4() throws IOException, ParseException {
+
+         File filteredJson = new File("jsonformatter.txt");
+         List<String> filteredList = new ArrayList<>();
+         JSONParser parser = new JSONParser();
+         JSONObject ojb = (JSONObject) parser.parse(new FileReader(filteredJson));
+         JSONArray filteredArr = (JSONArray) ojb.get("used");
+         for(Object templ:filteredArr){
+             JSONObject o = new JSONObject((Map) parser.parse((String) templ.toString()));
+             String tampName = o.keySet().toString();
+             System.out.println(tampName.substring(1, tampName.length()-1));
+             filteredList.add(tampName.substring(1, tampName.length()-1));
+         }
+
+File folder = new File("Category_data");
+        if(folder.exists()&&folder.isDirectory()) {
+            File[] listOfFiles = folder.listFiles();
+            for (File file : listOfFiles) {
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+                String pageId = (String) jsonObject.keySet().iterator().next();
+                String pageContent = jsonObject.get(pageId).toString();
+
+                List<String> templates = extractSubstringsV2(pageContent);
+                JSONObject resultJson = new JSONObject();
+                JSONArray jsonArray = new JSONArray();
+                for (String template : templates) {
+                    for(String check:filteredList){
+                        if(template.length()>check.length()+4){
+                            String tempName = template.substring(2,check.length()+2);
+                            if(tempName.equals(check)){
+                                System.out.println(tempName + " -eq-> " + check);
+                                jsonArray.add(template);
+                            }
+
+                        }
+                    }
+
+                }
+                resultJson.put(pageId, jsonArray);
+
+                File resultFile = new File("Templates_data2f//" + file.getName());
+                System.out.println(resultFile.getAbsolutePath());
+                try(FileWriter fileWriter = new FileWriter(resultFile)) {
+                    fileWriter.write(resultJson.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+
+    }
+     public static void filteringV5() throws IOException, ParseException {
+        File folder = new File("Templates_data2f");
+        if(folder.exists()&&folder.isDirectory()) {
+            File[] listOfFiles = folder.listFiles();
+            for (File file : listOfFiles) {
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+                String pageId = (String) jsonObject.keySet().iterator().next();
+                JSONArray templates = (JSONArray) jsonObject.get(pageId);
+
+                JSONObject resultJson = new JSONObject();
+                JSONObject templateJson = new JSONObject();
+                for (Object template : templates) {
+                    String temp = template.toString();
+                    if(temp.contains("|")){
+                        JSONArray jsonArray = new JSONArray();
+                        Map<String, String> map = parseInputString(temp);
+                        String tempName = temp.substring(temp.indexOf("{{")+2, temp.indexOf("|"));
+                        System.out.println(tempName);
+                        JSONObject json = new JSONObject();
+                        for (Map.Entry<String, String> entry : map.entrySet()) {
+                            json.put(entry.getKey(), entry.getValue());
+                        }
+                        jsonArray.add(json);
+                        templateJson.put(tempName, jsonArray);
+                    }
+                }
+                resultJson.put(pageId, templateJson);
+
+
+                File resultFile = new File("Prefiltered_templates_data2//" + file.getName());
+                //System.out.println(resultFile.getAbsolutePath());
+                try(FileWriter fileWriter = new FileWriter(resultFile)) {
+                    fileWriter.write(resultJson.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+    }
+    public static void filteringV6() throws IOException, ParseException {
+        File folder = new File("Templates_data2f");
+        JSONObject resultJson = new JSONObject();
+        if(folder.exists()&&folder.isDirectory()) {
+            File[] listOfFiles = folder.listFiles();
+
+            for (File file : listOfFiles) {
+                JSONObject templateJson = new JSONObject();
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+                String pageId = (String) jsonObject.keySet().iterator().next();
+                JSONArray templates = (JSONArray) jsonObject.get(pageId);
+
+                for (Object template : templates) {
+                    String temp = template.toString();
+                    if(temp.contains("|")){
+                        Map<String, String> map = parseInputString(temp);
+                        JSONObject json = new JSONObject();
+                        for (Map.Entry<String, String> entry : map.entrySet()) {
+                            json.put(entry.getKey(), entry.getValue());
+                            templateJson.put(pageId, json);
+                        }
+                    }
+                }
+                resultJson.put(file.getName(), templateJson);
+
+
+            }
+        }
+                File resultFile = new File("Prefiltered_templates_data2f.json");
+                //System.out.println(resultFile.getAbsolutePath());
+                try(FileWriter fileWriter = new FileWriter(resultFile)) {
+                    fileWriter.write(resultJson.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+    }
+
     public static void main(String[] args) {
-        String input = "";
-        //List<String> substrings = extractSubstrings(input);
         List<Map<String, String>> mappedTemplates = new ArrayList<>();
-//        for (String substring : substrings) {
-//            System.out.println(substring);
-//        }
-        //System.out.println(input);
-//        System.out.println(extractSubstringsV2(input).size());
         try{
-            filteringV3();
+            filteringV6();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {
