@@ -446,9 +446,8 @@ File folder = new File("Category_data");
                         }
                     }
                 }
-                resultJson.put(file.getName(), templateJson);
-
-
+                resultJson.put(file.getName().substring(0, file.getName().length()-5), templateJson);
+                System.out.println(templateJson);
             }
         }
                 File resultFile = new File("Prefiltered_templates_data2f.json");
