@@ -5,16 +5,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.luaj.vm2.ast.Str;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParameterCount {
     public static void FirstCheck(){
-        File file = new File("CustomeParameters//Objects.json");
+        File file = new File("CustomParameters//Objects.json");
         JSONParser parser = new JSONParser();
 
         try{
@@ -59,7 +56,69 @@ public class ParameterCount {
 
     }
 
+    public static void sortingByParameters() {
+        File file = new File("CustomParameters//Objects.json");
+        JSONParser parser = new JSONParser();
+
+        try {
+            JSONObject objects = (JSONObject) parser.parse(new FileReader(file));
+
+            for (Object object : objects.keySet()) {
+                String objectName = object.toString();
+
+                File newFolder = new File("CustomParameters/SortByPara//" + objectName);
+                if (!newFolder.exists()) {
+                    boolean created = newFolder.mkdir();
+                }
+                JSONObject newFileObj = new JSONObject();
+
+                JSONObject obj = (JSONObject) objects.get(object);
+                List<String> keyList = new ArrayList<>();
+
+                for (Object key : obj.keySet()) {
+                    String keyString = key.toString();
+                    keyList.add(keyString);
+                }
+
+                File dataFile = new File("Prefiltered_templates_data2f.json");
+                JSONObject dataObjs = (JSONObject) parser.parse(new FileReader(dataFile));
+                for(Object dataObj:dataObjs.keySet()){
+                    String dataName = dataObj.toString();
+                    JSONObject dataObjName = (JSONObject) dataObjs.get(dataName);
+                    label:for(Object data: dataObjName.keySet()){
+                        String dataId = data.toString();
+                        JSONObject parameters = (JSONObject) dataObjName.get(dataId);
+                        for(Object parameter:parameters.keySet()){
+                            String parameterString = parameter.toString();
+                            if(keyList.contains(parameterString)) {
+                                JSONObject newObj = new JSONObject();
+                                newObj.put(dataName, dataObjName);
+                                newFileObj.put(dataName, dataObjName);
+                                System.out.println(parameterString);
+                                break label;
+                            }
+                        }
+                    }
+                }
+                File newFile = new File("CustomParameters/SortByPara/" + objectName+"//"+objectName+".json");
+                System.out.println(newFile.getAbsolutePath());
+                try(FileWriter fileWriter = new FileWriter(newFile)) {
+                    fileWriter.write(newFileObj.toJSONString());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
-        FirstCheck();
+//        FirstCheck();
+        sortingByParameters();
     }
 }
