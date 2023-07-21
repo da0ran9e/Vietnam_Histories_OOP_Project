@@ -1,0 +1,404 @@
+\documentclass[a4paper,10pt,notitlepage]{article}
+
+\usepackage[]{geometry}
+\usepackage{setspace, soul}
+\usepackage{psfrag}
+\usepackage[dvips]{graphicx}
+\usepackage{pstricks}
+\usepackage[document]{ragged2e}
+\usepackage{acronym}
+\usepackage{latexsym}
+\usepackage{adjustbox}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{vietnam}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref,xcolor}
+\usepackage{fancyheadings}
+
+\usepackage{setspace,subfigure}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=udc]{hyperref}
+%\usepackage{helvet}
+\usepackage{array,amssymb,amsthm,amsmath,amstext}
+\usepackage{afterpage}
+\usepackage[font=small,bf]{caption}
+\usepackage{colortbl}
+\usepackage{emptypage}
+\usepackage{listings} 
+\usepackage{lscape}
+\usepackage{array}
+\usepackage{tikz} 
+
+
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\definecolor{textblue}{rgb}{.2,.2,.7}
+\definecolor{textred}{rgb}{0.54,0,0}
+\definecolor{textgreen}{rgb}{0,0.43,0}
+\usepackage{listings}
+\lstset{language=Python, 
+numbers=left, 
+numberstyle=\tiny, 
+stepnumber=1,
+numbersep=5pt, 
+tabsize=4,
+basicstyle=\ttfamily,
+keywordstyle=\color{textblue},
+commentstyle=\color{textgreen},   
+stringstyle=\color{textred},
+frame=none,                    
+columns=fullflexible,
+keepspaces=true,
+xleftmargin=\parindent,
+showstringspaces=false}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{background}
+\backgroundsetup{contents=\includegraphics{hustlogo.png}, scale = 0.45, angle = 0, opacity=0.25}
+
+\definecolor{udc}{rgb}{0.58,0.0.01,0.04} 
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+% set page geometry
+\geometry{a4paper, total={140mm,250mm}, left=20mm, right=20mm, top=14mm, bottom=30mm}
+
+\title{Vietnam History}
+\author{{Vu Duc An 20215174}
+\\ {Nguyen Tieu Phuong 20210692}
+\\ {Nguyen Dac Tam 20210763}
+\\ {Nguyen Tran Nhat Quoc 20210726}}
+\newcommand{\mails}{ {an.vd215174@sis.hust.edu.vn}
+\\ {phuong.nt210692@sis.hust.edu.vn}
+\\ {tam.nd210763@sis.hust.edu.vn}
+\\ {quoc.ntn210726@sis.hust.edu.vn}}
+\newcommand{\class}{139407 - IT3100E}
+\newcommand{\lecturer}{{Trinh Tuan Dat}
+\\dat.trinhtuan@hust.edu.vn
+}
+
+\date{\today}
+\makeatletter{}
+
+\usepackage{biblatex}
+\addbibresource{citations.bib}
+
+\begin{document} \raggedright
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\NoBgThispage
+\thispagestyle{empty}
+
+	\newcommand{\HRule}{\rule{\linewidth}{0.3mm}} 
+	\center 
+	\MakeUppercase{\large Hanoi University of Science and Technology
+	\\ \LARGE School of Information and Communication Technology}\\[0.5cm]
+		{\includegraphics[width=0.25\textwidth]{hustlogo.png} \par}\\[0.5cm]
+	\textsc	{\MakeUppercase{\Large OOP Project Report
+}\\[0.75cm]}
+	
+	\textsc	{\MakeUppercase{\large Object oriented programming\\\normalsize (IT3100E)}\\[0.5cm]}
+	
+	\HRule\\[0.4cm]
+
+	{\huge\bfseries \@title}\\[0.4cm]
+	
+	\HRule\\[1.5cm]
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft}
+			\large
+			\textit{Team members}\\
+			\@author
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright}
+			\large
+			\textit{Email}\\
+			\mails 
+		\end{flushright}
+	\end{minipage}
+\vfill\vfill
+        \begin{minipage}{0.4\textwidth}
+		\begin{center}
+			\large
+			\textit{Class}\\
+			\class\\
+			\textit{Lecturer}\\
+			\lecturer\\
+		\end{center}
+	\end{minipage}
+\vfill\vfill
+		{\large\today} 
+    \vfill\vfill
+    \normalsize{Time period: $23^{nd}$June - $10^{th}$July}
+    \\[0.3cm]
+   
+    \homepage
+    
+    \vfill
+    
+%\input{./title.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\centering
+% \thispagestyle{empty}
+\pagestyle{plain}
+\thispagestyle{empty}
+\backgroundsetup{contents = \includegraphics{soictlogo.png}, scale = 0.5, vshift = 5cm, angle = 50, opacity = 0.05}
+\begin{center}
+   \large \textbf{OOP PROJECT REPORT\\}
+   \normalsize \textbf{Vietnam History\\}
+   \small
+   Class: 139407\\
+   Lecturer: Trinh Tuan Dat\\
+    
+\end{center}
+\large
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\backgroundsetup{contents = \includegraphics{soictlogo.png}, scale = 0.5, vshift = 5cm, angle = 50, opacity = 0.05}
+\renewcommand{\thesection}{\Roman{section}} 
+%\renewcommand{\thesubsection}{\Roman{subsection}}
+\pagestyle{plain}
+\raggedright
+
+\setlength{\parindent}{1cm}
+
+\section{\textbf{Statistics of Data Collected}}
+    % \begin{figure}[h]
+    %     \centering
+    %     \includegraphics[width = 7cm]{Of7_p0001_15h.jpg}
+    % \end{figure}
+{\setlength{\parskip}{0.5cm}
+\vspace{-0.5cm}
+\hspace{1 cm}
+
+\hspace{1 cm}We deploy a web crawler to gather data from a diverse range of websites, including notable sources like Wikipedia, Nguoikesu, and Google. Initially, the data we amass is vast in quantity. However, through meticulous cleaning and filtering processes, only a number of usable and refined data remained.
+\\[0.3 in]
+\begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|c|c|c|c|c|}
+    \hline
+       Data  & Count & Attribute & Source & Description \\
+       \hline\hline
+       Dynasty & 14 & id, name, existedTime, capital,  & & The dynasties that existed  \\
+        & & kingName/listofKing & & throughout Vietnam history\\
+    \hline
+    Event & 71 & id, name, time, destination, & & Wars, resignation, and other \\
+    & & description, image, relatedPerson & &  historical occurrences\\
+    \hline
+    Festival & 51 & id, name, time, destination,  & & Special celebrations of Vietnam\\
+     & & description & & \\
+    \hline
+    Person & 1397 & id, name, givenName, father, dateOfBirth, & & Public figures, historical heroes,\\
+     & & dateOfDeath, description, dynasty & &  and person related to history\\
+    \hline
+    Relic & 22 & id, title, content, address,& & The historical monuments and places \\
+     & &  relatedPerson  & & alike\\
+    \hline
+       
+    \end{tabular}
+\end{adjustbox}
+
+\section{\textbf{UML Diagrams & Design Explanation:}}
+Some developers prefer to create UML diagrams before coding as part of the planning
+and design phase. However, we prefer to create UML diagrams after coding. This
+approach involves analyzing the existing codebase and generating UML diagrams to
+document the system's structure.
+It can be useful for understanding complex or legacy codebases and identifying
+patterns. It also helps us to come up with improvements and suggest refactoring if
+needed.
+\subsection{Package Diagram:}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 16.5cm]{package_diagram01.png}
+        \caption{The package of crawlers. Here a certain crawler for an entity is grouped into its own package. The List interface in Java is also used.}
+    \end{figure}
+    \newpage
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 13cm]{package_diagram02.png}
+        \caption{The package of classes for the entities. Each entity is in a package.}
+    \end{figure}
+    
+    \hspace{2cm}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 11cm]{package_diagram03.png}
+        \caption{The package of the List Java built-in interface and class used.}
+    \end{figure}
+
+   \hspace{2cm}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 15cm]{package_diagram04.png}
+        \caption{The package of JavaFX collections. The data, now encapsulated in objects, are passed to the ObservableLists. The FilteredList provides the wrapper around the source list.}
+    \end{figure}
+    \newpage
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 7cm]{jsoup_package.png}
+        \caption{The package of Jsoup}
+    \end{figure}
+    
+\subsection{Class Diagram}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 16cm]{class_diagram01.png}
+        \caption{The class diagram of storage objects}
+    \end{figure}
+    \newpage
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 13.5cm]{class_diagram02.png}
+        \caption{ The class diagram of entity Event. This is a class that has only one relation to another entity (Person)}
+    \end{figure}
+   
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width = 11cm]{class_diagram03.png}
+        \caption{The class diagram of the Person Crawler. This is an abstract class that inherits from the BaseCrawler, and there are source-specific classes that inherit from it to implement different scraping methods for each source.}
+    \end{figure}
+ 
+\newpage
+\section{\textbf{Applied OOP Techniques:}}
+Throughout the development of the project, we tried our best to apply the OOP
+techniques learned in class. Notably the 4 main principles of OOP are used:
+\subsection{Encapsulation:}
+This principle emphasizes the bundling of data and methods into a single unit
+called an object.
+What we do
+\begin{itemize}
+    \item Assign each entity to a class of its own (Dynasty, Event, Relic,...);
+    \item Assign the crawler of each entity to a class of its own (DynastyCrawler, 7EventCrawler, RelicCrawler…);
+    \item Grouping the UI controllers for each entity. For each entity, the controllers for the detailed information and the list interface are also broken down into separate ones. (DynastyDetailController, EventDetailController, RelicDetailController…) and (DynastyListController, EventListController,...)
+\end{itemize}
+The benefits:
+By encapsulating related data and behavior together, we can achieve data
+hiding and protect the internal state of an object. This enhances security,
+modularity, and code reusability.
+\subsection{Inheritance}
+Inheritance allows us to create new classes based on existing classes, inheriting
+their attributes and behaviors. 
+What we do: 
+\begin{itemize}
+    \item Implement an abstract class BaseCrawler that serves as the template for other crawlers. This class has attribute URL, crawl, write to json method that other crawlers based on. The crawlers for each entity inherits this base class.
+\end{itemize}
+The benefits:
+It promotes code reuse and enables the creation of hierarchical relationships
+between classes. With inheritance, we can build specialized classes that inherit
+common characteristics from a base class, reducing code duplication and
+improving maintainability.
+\subsection{Polymorphism}\\
+Polymorphism allows objects of diĸerent classes to be treated as objects of a
+common superclass.
+What we do:
+\begin{itemize}
+    \item The crawlers override the method speciĺed in the abstract base class;
+    \item In each entity class, constructor overloading is used extensively to allow for diĸerent cases of data (i.e. when only some data ĺeld/ attribute is available)
+\end{itemize}
+The benefits:
+It enables us to write code that can work with objects of multiple types,
+providing flexibility and extensibility. Polymorphism allows for method
+overriding, where a subclass can provide its own implementation of a method
+deĺned in its superclass, further enhancing code modularity and flexibility.
+\subsection{Abstraction:}\\
+Abstraction involves simplifying complex systems by breaking them down into
+manageable and understandable components.
+What we do
+\begin{itemize}
+    \item Break down the essentials of the project:
+    \begin{itemize}
+        \item An abstract class named "PersonCrawler" deĺnes an abstract
+method named "crawl". This method is implemented by other types
+of crawler, depending on web structure and base URL of other
+classes
+\item “DetalBaseController” define method “initMainContent” that other
+classes(EventBaseController, RelicBaseController,
+FestivalBaseController, RelicBaseController,
+PersonBaseController) show detail content
+\item The app, which contains the backend working of:
+\begin{itemize}
+    \item The crawlers
+    \item The objects
+    \item The data crawled
+    \item The storage structure
+\end{itemize}
+\item The GUI, which contains the frontend working of:
+\begin{itemize}
+    \item The controllers
+    \item CSS
+    \item The JavaFX and FXML Scene Builder
+\end{itemize}
+    \end{itemize}
+\end{itemize}
+The benefits:\\
+It allows us to focus on the essential features of an object or system while hiding
+unnecessary details. Abstraction helps in designing modular and maintainable
+code, as well as in creating reusable components.\\
+When the user interacts with our app, they do not need to know the underlying
+structure of the program or understand how everything works.\\
+Furthermore, other notable characteristics of our project are the application of some
+common design patterns, as well as the tech stack used
+\section{\textbf{Design Pattern:}}
+\subsection{Factory Pattern}
+BaseWebsiteCrawler works as a factory for other types of constructor.
+Benefits: \\
+The Factory Pattern encapsulates object creation, provides an abstraction
+layer, promotes flexibility and code reuse. It separates the object creation
+process from the client code and allows for changes in the creation process
+without aĸecting other classes.
+\subsection{Strategy Pattern:}
+In class Storage, to handle search functionality for diĸerent categories of data
+or diĸerent algorithms. In our project, we implement 5 methods of
+search(searchDynasty, searchFestival, searchPerson, searchRelic, searchEvent)
+based on string matching.
+\subsection{Singleton Pattern:}
+To ensure that only one instance of each crawler is running at a time, we
+implement the Singleton Pattern by making each crawler class a singleton.\\
+The beneĺt of the Singleton Pattern to prevent conflicts between multiple
+instances of the same crawler running simultaneously, reduces the memory
+footprint of the application, as there is only one instance of each crawler class in
+memory at any given time.
+\section{\textbf{Tech Stack:}}
+\label{sec:TT}
+\begin{enumerate}
+    \item \textbf{Maven:} The library classes added through Maven help to synchronize code
+(avoid conflicts between versions or IDEs).
+\item \textbf{Java Coding Convention:} Classes, packages, variable names, and functions
+are named according to the standard.
+\item  Build Class and package diagrams using a consistent UML modeling language in \textbf{Astah}.
+\item \textbf{Jsoup}: A specialized library for data collection through web pages, added
+through Maven.
+\item Build a GUI interface with \textbf{JavaFX Scene Builder}.
+\item \textbf{Gson}: A Google library for Java used for reading or writing data with .json
+files to objects.
+\item \textbf{Github}: Managing source code through Github.
+\end{enumerate}
+\section{\textbf{User Guide}}
+To get started, clone the source code from this \href{https://github.com/da0ran9e/oop_history_prj}{GitHub repository} . Make sure you have
+Java and associated softwares mentioned in the Tech Stack \ref{sec:TT}.\\
+Navigate to the src folder of the code. From the App.java ĺle, run the main() method.\\
+Now you can interact with the app via GUI.\\
+% \section{\textbf{Reference}}
+% \nocite{*}
+% \printbibliography
+
+\newpage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
