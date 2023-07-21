@@ -1,0 +1,22 @@
+.menu-bar:hover {
+    -fx-border-color: #F8BDA0;
+    -fx-border-width: 0px 0px 3px 0px;
+}
+.selected-menu {
+    -fx-border-color: #F8BDA0;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+.side-bar-btn {
+    -fx-background-color: #191b23;
+    -fx-font-size: 16;
+    -fx-start-margin: 10;
+    -fx-cursor: hand;
+}
+.side-bar-btn:hover {
+    -fx-text-fill: #F8BDA0;
+}
+.current-content-btn {
+    -fx-text-fill: #F8BDA0;
+}

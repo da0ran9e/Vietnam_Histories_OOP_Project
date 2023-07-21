@@ -1,0 +1,39 @@
+.tree-view-title{
+    -fx-font-size: 24;
+    -fx-font-weight: 700;
+}
+.title {
+    -fx-font-size: 40;
+    -fx-font-weight: 700;
+    -fx-font-fill: #ffffff;
+}
+.sub-title {
+    -fx-font-size: 28;
+    -fx-font-weight: 600;
+    -fx-font-fill: #ffffff;
+}
+.description {
+    -fx-font-size:20;
+    -fx-font-weight:600;
+    -fx-font-fill: #ffffff;
+}
+.content {
+    -fx-font-size: 20;
+}
+.dynasty {
+    -fx-font-size: 20;
+    -fx-font-weight: 700;
+    -fx-cursor: hand;
+}
+.king-name {
+    -fx-font-size:20;
+    -fx-font-weight: 700;
+}
+.king-name:hover {
+    -fx-text-fill: #f59c75;
+}
+.empty-label {
+    -fx-font-size: 20;
+    -fx-font-weight: 700;
+    -fx-font-fill: #7B8FA1 !important;
+}

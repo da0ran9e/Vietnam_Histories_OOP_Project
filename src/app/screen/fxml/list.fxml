@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" style="-fx-background-color: FAF5ED;" stylesheets="@../css/list.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- Content ***-->
+    <center>
+        <!-- content container using scroll pane -->
+        <ScrollPane fx:id="contentContainer" fitToHeight="true" fitToWidth="true" prefHeight="660.0" style="-fx-background-color: FAF5ED;" BorderPane.alignment="CENTER">
+            <content>
+                <VBox fx:id="paginationContainer" prefHeight="78.0" prefWidth="1024.0" style="-fx-background-color: #191b23;">
+                    <children>
+                        <!-- grid pane rows and column contraints -->
+                        <GridPane fx:id="gridPane" alignment="CENTER" hgap="10" prefHeight="546.0" prefWidth="1022.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.geometry.Insets?&gt;&lt;?import javafx.scene.layout.ColumnConstraints?&gt;&lt;?import javafx.scene.layout.GridPane?&gt;&lt;?import javafx.scene.layout.RowConstraints?&gt;&lt;?import javafx.scene.layout.VBox?&gt;&lt;VBox fx:id=&quot;paginationContainer&quot; prefHeight=&quot;78.0&quot; prefWidth=&quot;1024.0&quot; style=&quot;-fx-background-color: ffffff;&quot; xmlns=&quot;http://javafx.com/javafx/20.0.1&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;children&gt;      &lt;GridPane fx:id=&quot;gridPane&quot; alignment=&quot;CENTER&quot; hgap=&quot;10&quot; prefHeight=&quot;546.0&quot; prefWidth=&quot;1022.0&quot; style=&quot;-fx-background-color: ffffff;&quot; vgap=&quot;10&quot;&gt;         &lt;columnConstraints&gt;            &lt;ColumnConstraints /&gt;            &lt;ColumnConstraints /&gt;            &lt;ColumnConstraints /&gt;            &lt;ColumnConstraints /&gt;         &lt;/columnConstraints&gt;         &lt;rowConstraints&gt;            &lt;RowConstraints /&gt;            &lt;RowConstraints /&gt;            &lt;RowConstraints /&gt;            &lt;RowConstraints /&gt;         &lt;/rowConstraints&gt;         &lt;padding&gt;            &lt;Insets bottom=&quot;20.0&quot; left=&quot;20.0&quot; right=&quot;20.0&quot; top=&quot;20.0&quot; /&gt;         &lt;/padding&gt;      &lt;/GridPane&gt;   &lt;/children&gt;&lt;/VBox&gt;;" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                            </rowConstraints>
+                            <padding>
+                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                            </padding>
+                        </GridPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="layoutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #21222c;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.screen.controller.LayoutController">
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="10.0" style="-fx-background-color: #2e2f3e;" BorderPane.alignment="CENTER">
+            <children>
+                <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleBackToHome" prefHeight="60.0" prefWidth="192.0" style="-fx-background-color: #2e2f3e;" text="Trang chủ" textFill="WHITE">
+                    <font>
+                        <Font name="Fira Mono Bold" size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            <Line endX="-267.3487548828125" endY="40.67546463012695" startX="-267.55584716796875" startY="84.851806640625" stroke="#a19696" />
+      
+                      <!-- search box -->
+                <VBox alignment="CENTER" prefHeight="95.0" prefWidth="158.0" style="-fx-background-color: #2e2f3e;">
+                    <HBox.margin>
+                        <Insets left="60.0" />
+                    </HBox.margin>
+                </VBox>
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <StackPane fx:id="contentArea" maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER" />
+    </center>
+   <left>
+      <VBox prefHeight="660.0" prefWidth="158.0" style="-fx-background-color: #2e2f3e;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="578.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="0.0" style="-fx-background-color: #2e2f3e;" styleClass="header-button" stylesheets="@../css/detail.css">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="tfSearch" prefHeight="35.0" prefWidth="310.0" promptText="Searching" style="-fx-background-color: #2e2f3e;" styleClass="search-box" stylesheets="@../css/detail.css">
+                     <font>
+                        <Font name="Fira Mono" size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+                  <!-- search box underline -->
+                  <Line endX="-77.262939453125" endY="-13.735109329223633" startX="-267.55584716796875" startY="-13.733979225158691" stroke="#a19696" />
+                <Button fx:id="dynastyBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleDynastyBtnClicked" prefHeight="54.0" prefWidth="153.0" style="-fx-background-color: #2e2f3e;" styleClass="menu-bar" stylesheets="@../css/layout.css" text="Triều đại" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Fira Mono" size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="eventBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleEventBtnClicked" prefHeight="41.0" prefWidth="148.0" style="-fx-background-color: #2e2f3e;" styleClass="menu-bar" stylesheets="@../css/layout.css" text="Sự kiện" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Fira Mono" size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="festivalBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleFestivalBtnClicked" prefHeight="36.0" prefWidth="151.0" style="-fx-background-color: #2e2f3e;" styleClass="menu-bar" stylesheets="@../css/layout.css" text="Lễ hội" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="personBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handlePersonBtnClicked" prefHeight="43.0" prefWidth="157.0" style="-fx-background-color: #2e2f3e;" styleClass="menu-bar" stylesheets="@../css/layout.css" text="Nhân vật" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Fira Mono" size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="relicBtn" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleRelicBtnClicked" prefHeight="40.0" prefWidth="151.0" style="-fx-background-color: #2e2f3e;" styleClass="menu-bar" stylesheets="@../css/layout.css" text="Di tích" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            <Line endX="-77.262939453125" endY="-13.735109329223633" startX="-267.55584716796875" startY="-13.733979225158691" stroke="#a19696" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>

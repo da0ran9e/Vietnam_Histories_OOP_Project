@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Container -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" style="-fx-background-color: #191b23;" styleClass="border-pane-background" stylesheets="@../css/detail.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <!-- Header -->
+    <!-- content container -->
+    <center>
+        <!-- Scrollpane container -->
+        <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="660.0" prefWidth="1024.0" style="-fx-background-color: #191b23;">
+            <content>
+
+                <!-- Using hbox to devide into 2 part, left center and right tree view -->
+                <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1004.0" spacing="15.0" style="-fx-background-color: #191b23;">
+                    <children>
+                  <VBox prefHeight="655.0" prefWidth="212.0" style="-fx-background-color: #191b23;" />
+
+                        <!-- Main content -->
+                        <VBox fx:id="mainContent" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="655.0" prefWidth="621.0" style="-fx-background-color: #191b23;">
+                        </VBox>
+
+                        <!-- SEPERATOR LINE -->
+                        <Separator orientation="VERTICAL" prefHeight="655.0" prefWidth="0.0" style="-fx-background-color: #191b23;" />
+
+                        <!-- Tree view -->
+                        <VBox fillWidth="false" prefHeight="655.0" prefWidth="6.0" spacing="15.0" style="-fx-background-color: #191b23;" stylesheets="@../css/layout.css">
+                            <!-- Title -->
+                            <children>
+                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="tree-view-title" text="Related">
+                                    <VBox.margin>
+                                        <Insets left="8.0" />
+                                    </VBox.margin>
+                           <font>
+                              <Font name="Fira Mono" size="13.0" />
+                           </font>
+                                </Text>
+                                <VBox fx:id="sideBar" spacing="15.0">
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                            <padding>
+                                <Insets bottom="10.0" top="10.0" />
+                            </padding>
+                        </VBox>
+
+                    </children>
+
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </HBox>
+
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

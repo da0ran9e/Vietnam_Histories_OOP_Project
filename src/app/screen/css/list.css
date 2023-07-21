@@ -1,0 +1,11 @@
+.text-title{
+    -fx-font-size: 20px;
+    -fx-font-weight:700;
+}
+.text-title:hover{
+    -fx-text-fill: #ffffff;
+}
+.text-description {
+    -fx-font-size: 16px;
+    -fx-font-fill: #ffffff;
+}
